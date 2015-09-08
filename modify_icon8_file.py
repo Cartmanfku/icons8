@@ -5,15 +5,22 @@ import os
 
 def modify_icon_file_name(dir_path, icon, prefix, suffix):
     try:
-        icon_name = icon.split('.')[0]
-        icon_name = icon_name.strip()
-        icon_name = icon_name.lower()
-        icon_name = icon_name.replace(' ','_')
-        icon_name = icon_name.replace('+','plus')
-        icon_name = icon_name.replace('-','minus')
-        icon_name = prefix + icon_name + suffix
+        if icon.startswith(prefix):
+            print 'already matches icon name pattern'
+            return
+        else:
+
+            icon_name = icon.split('.')[0]
+            icon_name = icon_name.strip()
+            icon_name = icon_name.lower()
+            icon_name = icon_name.replace(' ','_')
+            icon_name = icon_name.replace('+','plus')
+            icon_name = icon_name.replace('-','minus')
+            icon_name = prefix + icon_name + suffix
+
         print icon_name
         os.rename(os.path.join(dir_path,icon), os.path.join(dir_path, icon_name))
+
     except Exception,e:
         print e.message
         print e.args
